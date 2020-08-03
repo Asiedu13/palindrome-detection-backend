@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/user.model");
-const assert = require('assert');
+const assert = require("assert");
 router.route("/").get((req, res) => {
   User.find()
     .then((data) => res.status(200).json(data))
@@ -20,11 +20,14 @@ router.route("/include").post((req, res) => {
     words,
   });
 
-  newUser.validate().catch(error => {
+  newUser.validate().catch((error) => {
     assert.ok(error);
-    assert.equal(error.errors['username'].message, 'Oops!');
-    assert.equal(error.errors['email'].message, 'Email validation is incorrect');
-  })
+    assert.equal(error.errors["username"].message, "Oops!");
+    assert.equal(
+      error.errors["email"].message,
+      "Email validation is incorrect"
+    );
+  });
   newUser.save().then(() => res.status(200).json("User added successfully"));
 });
 module.exports = router;

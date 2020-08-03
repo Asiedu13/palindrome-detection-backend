@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let wordSchema = new Schema({
-  user_id: {type: Object},
+  user_id: { type: Object },
   text: { type: String, required: true, trim: true, lowercase: true },
 });
 
