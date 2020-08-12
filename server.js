@@ -26,5 +26,20 @@ const users = require("./routes/users");
 app.use("/api/history", historic);
 app.use("/api/users", users);
 
+app.use((req, res, next) => {
+  const error = new Error("Invalid route");
+  error.status = 404;
+  next(error);
+});
+
+app.use((err, req, res, next)=>{
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      message: err.message,
+
+    }
+  })
+})
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));

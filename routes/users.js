@@ -28,6 +28,6 @@ router.route("/include").post((req, res) => {
       "Email validation is incorrect"
     );
   });
-  newUser.save().then(() => res.status(200).json("User added successfully"));
+  newUser.save().then(() => res.status(201).json({message:"User added successfully", newUser}));
 });
 module.exports = router;
