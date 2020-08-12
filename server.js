@@ -23,7 +23,8 @@ app.get("/", (req, res) => {
 });
 const historic = require("./routes/words");
 const users = require("./routes/users");
-app.use("/history", historic);
+app.use("/api/history", historic);
 app.use("/api/users", users);
+
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
