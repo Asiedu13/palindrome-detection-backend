@@ -7,8 +7,6 @@ const userSchema = new Schema({
     default: "New User",
     required: true,
     trim: true,
-    // unique: true,
-    // validate: () => Promise.reject('Oops!'),
   },
   password: { type: String, trim: true },
   email: {
@@ -24,5 +22,6 @@ const userSchema = new Schema({
   words: { type: Array },
 });
 userSchema.set("validateBeforeSave", false);
+
 const User = mongoose.model("User", userSchema, "Users");
 module.exports = User;
