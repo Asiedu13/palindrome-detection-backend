@@ -8,7 +8,6 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
-
 const uri = process.env.db_URI;
 
 const db = mongoose.connection;
@@ -25,7 +24,6 @@ app.get("/", (req, res) => {
 });
 const historic = require("./routes/words");
 const users = require("./routes/users");
-
 
 app.use("/api/history", historic);
 app.use("/api/users", users);

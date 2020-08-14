@@ -21,15 +21,15 @@ router.route("/include").post((req, res) => {
     words,
   });
 
-  
   newUser
     .save()
     .then((nUser) =>
       res.status(201).json({ message: "User added successfully", nUser })
-    ).catch(err => {
+    )
+    .catch((err) => {
       res.status(500).json({
         error: err,
-      })
+      });
     });
 });
 module.exports = router;
