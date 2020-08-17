@@ -20,6 +20,7 @@ db.on("error", console.error.bind(console, "Connection error"));
 db.once("open", () => console.log("Connected to database successfully"));
 
 app.get("/", (req, res) => {
+  console.log(req.session);
   res.send("I am working perfectly");
 });
 const historic = require("./routes/words");
