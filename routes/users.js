@@ -9,14 +9,13 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/include").post((req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   const username = req.body.username.toLowerCase();
-  const email = req.body.email.toLowerCase();
-  const password = String(req.body.password);
-  const words = req.body.words;
+  const password = req.body.password;
+  const words = [req.body.words];
 
   let newUser = new User({
     username,
-    email,
     password,
     words,
   });
@@ -31,5 +30,7 @@ router.route("/include").post((req, res) => {
         error: err,
       });
     });
+  console.log(newUser);
 });
+
 module.exports = router;
