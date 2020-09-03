@@ -2,16 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: {
+  email: {
     type: String,
-    default: "New User",
     required: true,
     trim: true,
+    unique: true,
   },
   password: { type: Schema.Types.Mixed, trim: true, required: true },
   words: { type: Array },
 });
-// userSchema.set("validateBeforeSave", false);
 
-const User = mongoose.model("User", userSchema, "Users");
+const User = mongoose.model("User", userSchema, "users");
 module.exports = User;

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const User = require("../models/user.model");
-const assert = require("assert");
 
 router.route("/").get((req, res) => {
   User.find()
@@ -10,12 +9,12 @@ router.route("/").get((req, res) => {
 
 router.route("/include").post((req, res) => {
   res.set("Access-Control-Allow-Origin", "*");
-  const username = req.body.username.toLowerCase();
+  const email = req.body.email;
   const password = req.body.password;
   const words = [req.body.words];
 
   let newUser = new User({
-    username,
+    email,
     password,
     words,
   });
@@ -27,10 +26,44 @@ router.route("/include").post((req, res) => {
     )
     .catch((err) => {
       res.status(500).json({
-        error: err,
+        error: `${err} error`,
       });
     });
-  console.log(newUser);
+  // console.log(newUser);
 });
+
+// Authenticate user
+router.route("/login").post((req, res) => {
+  User.findOne({ email: req.body.email, password: req.body.password })
+    .then((user) => {
+      if (user) {
+        res.status(200).json({
+          message: `User exists`,
+          user,
+        });
+      } else {
+        res.status(404).json({
+          message: `User does not exist`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        err: `/login failure: ${err}`,
+      });
+    });
+});
+
+// get individual user
+router.route("/:id").get((req, res) => {
+  User.findById(req.params.id).then((data) => {
+    if (req.params.id) {
+    }
+  });
+});
+
+function resolution(user, stat, msg, errStat, errVal, res) {
+ 
+}
 
 module.exports = router;
